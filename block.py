@@ -1,5 +1,5 @@
 import datetime
-
+# Not actaully using it, was just trying something
 
 class Block:
     def __init__(self, index, transactions, proof,
