@@ -1,0 +1,5 @@
+name: private-blockchain
+channels:
+  - defaults
+prefix: /Users/anmolarora/miniconda3/envs/private-blockchain
+
