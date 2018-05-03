@@ -61,15 +61,21 @@ class Blockchain:
         """ Gets the last block added to the blockchain """
         return self.chain[-1]
 
+
     def proof_of_work(self, last_proof):
+        """ Proof of Work Algorithm:
+            After appending the last proof with a test proof, 
+            if the hash produces 4 leading 0s, the test proof becomes the valid proof for the block"""
         proof = 0
         while not valid_proof(last_proof, proof):
             proof = proof+1
         
         return proof
 
+
     @staticmethod
     def valid_proof(self, last_proof, proof):
+        """ Check if the proof is valid i.e, has 4 leading zeroes"""
         guess_string  = f'{last_proof}{proof}'.encode()
         guess_hash = hasher.sha256(guess_string).hexdigest()
 
