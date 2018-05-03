@@ -38,6 +38,8 @@ class Blockchain:
         self.chain.append(block)
         self.current_transactions[:] = []   #Empty the list of current transactions once they are added to the block
 
+        return block 
+
 
     def add_transaction(self, sender, recipient, amount):
         """ Add transaction to be mined in the next block """
@@ -47,6 +49,7 @@ class Blockchain:
             'recipient':recipient,
             'amount': amount
         })
+        return len(self.chain)+1
 
 
     @staticmethod
