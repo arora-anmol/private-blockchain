@@ -14,29 +14,32 @@ class Blockchain:
         """ Initialize the blockchain """
         self.chain = []
         self.current_transactions = []
+        self.nodes = set()
         #Creating the genesis block
-        self.chain.append(self._create_block(proof=100, previous_hash=1, index=0))
+        genesis_block = self._create_block(proof=100, previous_hash=1, index=1)
+        self.chain.append(genesis_block)
 
 
     def _create_block(self, proof, previous_hash, index=None):
         """ Creates and returns a new block using the current transactions """
-        if index:
-            index = len(self.chain)+1 
+        if not index:
+            index = len(self.chain)+1
         return {
-            'index': index
-            'timestamp': datetime.datetime.now(),
-            'transactions': self.current_transactions,
-            'proof': proof
+            'index': index,
+            'timestamp': str(datetime.datetime.now()),
+            'transactions': self.current_transactions.copy(),
+            'proof': proof,
             'previous_hash': previous_hash
         }
 
 
-    def add_block(self):
+    def add_block(self, proof):
         """Add a new block to blockchain """
-        index = len(self.chain)+1
-        block = self._create_block(proof, self.chain[-1].hash())
+        block = self._create_block(proof, Blockchain.hash(self.chain[-1]))
+        self.current_transactions = []   #Empty the list of current transactions once they are added to the block
         self.chain.append(block)
-        self.current_transactions[:] = []   #Empty the list of current transactions once they are added to the block
+
+        return block 
 
 
     def add_transaction(self, sender, recipient, amount):
@@ -47,6 +50,7 @@ class Blockchain:
             'recipient':recipient,
             'amount': amount
         })
+        return self.chain[-1]['index']+1
 
 
     @staticmethod
@@ -63,18 +67,20 @@ class Blockchain:
 
 
     def proof_of_work(self, last_proof):
-        """ Proof of Work Algorithm:
+        """
+            Proof of Work Algorithm:
             After appending the last proof with a test proof, 
-            if the hash produces 4 leading 0s, the test proof becomes the valid proof for the block"""
+            if the hash produces 4 leading 0s, the test proof becomes the valid proof for the block
+        """
         proof = 0
-        while not valid_proof(last_proof, proof):
+        while not Blockchain.valid_proof(last_proof, proof):
             proof = proof+1
         
         return proof
 
 
     @staticmethod
-    def valid_proof(self, last_proof, proof):
+    def valid_proof(last_proof, proof):
         """ Check if the proof is valid i.e, has 4 leading zeroes"""
         guess_string  = f'{last_proof}{proof}'.encode()
         guess_hash = hasher.sha256(guess_string).hexdigest()
