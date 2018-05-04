@@ -23,15 +23,15 @@ class Blockchain:
         if index:
             index = len(self.chain)+1 
         return {
-            'index': index
+            'index': index,
             'timestamp': datetime.datetime.now(),
             'transactions': self.current_transactions,
-            'proof': proof
+            'proof': proof,
             'previous_hash': previous_hash
         }
 
 
-    def add_block(self):
+    def add_block(self, proof):
         """Add a new block to blockchain """
         index = len(self.chain)+1
         block = self._create_block(proof, self.chain[-1].hash())
@@ -49,7 +49,7 @@ class Blockchain:
             'recipient':recipient,
             'amount': amount
         })
-        return len(self.chain)+1
+        return self.chain[-1]['index']+1
 
 
     @staticmethod
@@ -66,9 +66,11 @@ class Blockchain:
 
 
     def proof_of_work(self, last_proof):
-        """ Proof of Work Algorithm:
+        """
+            Proof of Work Algorithm:
             After appending the last proof with a test proof, 
-            if the hash produces 4 leading 0s, the test proof becomes the valid proof for the block"""
+            if the hash produces 4 leading 0s, the test proof becomes the valid proof for the block
+        """
         proof = 0
         while not valid_proof(last_proof, proof):
             proof = proof+1

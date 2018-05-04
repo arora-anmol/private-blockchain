@@ -49,11 +49,11 @@ def new_transaction():
     return jsonify(response), 200
 
 
-@app.route('/chain', method=['GET'])
+@app.route('/chain', methods=['GET'])
 def get_chain():
     """ This function is used to get the chain data """
     response = {
-        'chain':blockchain.chain,
+        'chain': blockchain.chain,
         'length':len(blockchain.chain)
     }
 
