@@ -23,7 +23,8 @@ blockchain = Blockchain()
 @app.route('/mine', methods=['GET'])
 def mine():
     """ This function is used to mine the block with current transactions"""
-    last_block = blockchain.get_last_block()
+    last_block = blockchain.get_last_block
+    print(last_block)
     last_proof = last_block['proof']
     proof = blockchain.proof_of_work(last_proof)
 
@@ -39,7 +40,12 @@ def new_transaction():
     """ This function is used to add a transaction to the current transactions list"""
 
     data = request.get_json()
+
+    if not data:
+        return "No transation data passed", 400
+
     required = ['sender', 'recipient', 'amount']
+
     if not (list(data.keys()) == required):
         return 'Missing Value', 400
     
