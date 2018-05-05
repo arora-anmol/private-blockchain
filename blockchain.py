@@ -23,7 +23,7 @@ class Blockchain:
         self.chain.append(genesis_block)
 
 
-    def register_nodes(self, address):
+    def register_node(self, address):
         parsed_url = urlparse(address)
         self.nodes.add(parsed_url)
 
@@ -131,7 +131,7 @@ class Blockchain:
         if dominant_chain:
             self.chain = dominant_chain
             return True
-            
+
         return False
 
 
