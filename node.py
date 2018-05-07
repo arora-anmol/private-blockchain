@@ -51,10 +51,48 @@ def new_transaction():
     
     block_index = blockchain.add_transaction(data['sender'], data['recipient'], data['amount'])
     response = {'message':f'Adding the transaction to block at index: {block_index}'}
+
+    return jsonify(response), 201
+
+
+@app.route('/nodes/register', methods=['POST'])
+def register_nodes():
+    nodes = request.get_json().get('nodes')
+    if nodes is None:
+        return " Need valid nodes to register", 400
+
+    for node in nodes:
+        blockchain.register_node(node)
+
+    response = {
+        'message': 'Added more nodes to the network'
+        'list_of_nodes': list(self.nodes)
+    }
     
-    return jsonify(response), 200
+    return jsonify(response), 201
 
 
+@app.route('/nodes/resolve', methods=['GET'])
+def consensus():
+    replaced = blockchain.resolve_conflicts()
+
+    if replaced:
+        response = {
+            'message': 'This chain was replaced by another chain'
+            'new_chain': blockchain.chain
+        }
+        
+        return jsonify(response), 201
+
+    else:
+        response = {
+            'message': 'This chain was not replaced'
+            'chain': blockchain.chain
+        }
+
+        return jsonify(response), 200
+    
+    
 @app.route('/chain', methods=['GET'])
 def get_chain():
     """ This function is used to get the chain data """
