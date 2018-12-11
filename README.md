@@ -9,11 +9,11 @@ You can run the flask app by simply running ``` python node.py```. This basicall
 
 # Blockchain API
 Once the Flask node is running, we can start making requests. Here's a list of interfaces available:
-- /mine (GET) : This is uses to mine the block with current transactions
-- /transactions/new (POST): This is used to post a new transaction to the block. 
-- /nodes/register (POST): This is used to register new nodes/ nodes which are part of the network
-- /nodes/resolve (GET): This looks at the nodes in the network and resolves itself. 
-- /chain (GET): This is used to get the entire blockchain info
+- **/mine (GET)** : This is uses to mine the block with current transactions
+- **/transactions/new (POST)**: This is used to post a new transaction to the block. 
+- **/nodes/register (POST)**: This is used to register new nodes/ nodes which are part of the network
+- **/nodes/resolve (GET)**: This looks at the nodes in the network and resolves itself. 
+- **/chain (GET)**: This is used to get the entire blockchain info
 
 # DEMO
 So, for a demo, these are the steps that could be followed. You can clone the repo first and then cd into the directory
@@ -25,7 +25,9 @@ So, for a demo, these are the steps that could be followed. You can clone the re
 ## Running the blockchain node <br>
 ``` python node.py``` <br>
 ## Adding transaction to the node - ( I am using curl for this) <br>
-``` curl -X POST -H "Content-Type: application/json" -d '{
+
+``` 
+curl -X POST -H "Content-Type: application/json" -d '{
  "sender": "d4ee26eee15148ee92c6cd394edd974e",
  "recipient": "someone-other-address",
  "amount": 5
