@@ -5,7 +5,7 @@ Blockchain Implementation in python using Flask for setting up the node. I am us
 I have been actively involved in the blockchain community for quite some time. To look at blockchain from a technical perspective and learn how it works ground up, I worked on this project. I would like to thank Daniel for this article here:https://hackernoon.com/learn-blockchains-by-building-one-117428612f46 which helped me throughout the process. 
 
 # How to run it?
-You can run the flask app by simply running ``` python node.py```. This basically runs a flask server as a node on the blockchain, and there's blockchain interface with the API. 
+You can run the flask app by simply running ``` python node.py```. This basically runs a flask server as a node for the blockchain, and there's blockchain interface with the API. It binds to **port 5000**, so we can only run one node for now. We can change code to run at different nodes dynamically. This is done in order to make things easier for now.
 
 # Blockchain API
 Once the Flask node is running, we can start making requests. Here's a list of interfaces available:
