@@ -65,7 +65,7 @@ def register_nodes():
         blockchain.register_node(node)
 
     response = {
-        'message': 'Added more nodes to the network'
+        'message': 'Added more nodes to the network',
         'list_of_nodes': list(self.nodes)
     }
     
@@ -78,7 +78,7 @@ def consensus():
 
     if replaced:
         response = {
-            'message': 'This chain was replaced by another chain'
+            'message': 'This chain was replaced by another chain',
             'new_chain': blockchain.chain
         }
         
@@ -86,7 +86,7 @@ def consensus():
 
     else:
         response = {
-            'message': 'This chain was not replaced'
+            'message': 'This chain was not replaced',
             'chain': blockchain.chain
         }
 

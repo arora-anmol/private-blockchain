@@ -3,6 +3,7 @@ channels:
   - defaults
 dependencies:
   - asn1crypto=0.24.0=py36_0
+  - blas=1.0=mkl
   - ca-certificates=2018.03.07=0
   - certifi=2018.4.16=py36_0
   - cffi=1.11.5=py36h342bebf_0
@@ -45,5 +46,5 @@ dependencies:
   - wheel=0.31.0=py36_0
   - xz=5.2.3=h727817e_4
   - zlib=1.2.11=hf3cbc9b_2
-prefix: /Users/anmolarora/miniconda3/envs/private-blockchain
+prefix: /Users/robbery/miniconda3/envs/private-blockchain
 
